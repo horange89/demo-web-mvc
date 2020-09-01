@@ -1,18 +1,37 @@
 package me.study.demowebmvc;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.awt.*;
 
 @Controller
-@RequestMapping(method = RequestMethod.GET)
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class SampleController {
 
-    @RequestMapping("hello")
     @ResponseBody
+    @GetHelloMapping
     public String hello() {
         return "hello";
     }
+
+    @ResponseBody
+    @GetMapping("/events")
+    public String getEvents() {
+        return "events";
+    }
+
+    @ResponseBody
+    @GetMapping("/events/{id}")
+    public String getEventsWithId(@PathVariable("id") int id) {
+        return "events " + id;
+    }
+
+    @DeleteMapping("/events/{id}")
+    @ResponseBody
+    public String deleteEvents(@PathVariable("id") int id) {
+        return "events";
+    }
+
 }
