@@ -18,8 +18,19 @@ public class SampleControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+
     @Test
     public void getEvents() throws Exception {
+        mockMvc.perform(get("/events/form"))
+                .andDo(print())
+                .andExpect(view().name("/events/form"))
+                .andExpect(model().attributeExists("event"))
+        ;
+    }
+
+
+    @Test
+    public void postEvents() throws Exception {
         mockMvc.perform(post("/events")
                     .param("name", "keesun")
                     .param("limit", "20"))
